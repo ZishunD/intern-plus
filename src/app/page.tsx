@@ -181,7 +181,7 @@ export default function HomePage() {
             height={300}
             priority
             quality={100}
-            src='./laptop-icon-1.png'
+            src='/laptop-icon-1.png'
             alt='Laptop Icon'
             className='w-full max-w-xs md:max-w-md lg:max-w-lg'
           />
@@ -263,7 +263,7 @@ export default function HomePage() {
               height={135}
               priority
               quality={100}
-              src='./landing/briefcase-icon.png'
+              src='/landing/briefcase-icon.png'
               alt='Briefcase Icon'
               className='w-60 h-60 md:w-135 md:h-135'
             />
