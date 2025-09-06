@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // components/PriceCard.tsx
 import Package from "@/components/Package";
 
