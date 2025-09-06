@@ -1,6 +1,6 @@
 import { gql, request, GraphQLClient } from "graphql-request";
 
-const ENDPOINT = "http://localhost:8080/query"; // 或者你部署的后端地址
+const ENDPOINT = "https://intern-plus-backend.onrender.com/query"; // 或者你部署的后端地址
 const client = new GraphQLClient(ENDPOINT);
 
 export async function registerUser(input: {

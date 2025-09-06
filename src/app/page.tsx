@@ -12,7 +12,7 @@ export default function HomePage() {
     {
       name: "INTERNSHIP",
       description:
-        "This website is the company's operating system for students throughout their internship until the end.",
+        "This website is the company&apos;s operating system for students throughout their internship until the end.",
       url: "/landing/briefcase-icon.png",
     },
     {
@@ -196,7 +196,11 @@ export default function HomePage() {
 
         {/* Right Section (Image) */}
         <div className='img flex-1 flex justify-center mt-10 md:mt-0'>
-          <img
+          <Image
+            width={400}
+            height={300}
+            priority
+            quality={100}
             src='./laptop-icon-1.png'
             alt='Laptop Icon'
             className='w-full max-w-xs md:max-w-md lg:max-w-lg'
@@ -216,7 +220,9 @@ export default function HomePage() {
                 key={idx}
                 className='bg-white rounded-lg shadow p-8 flex flex-col items-center text-center'>
                 <div className='img mb-4'>
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     src={service.url}
                     alt={`${service.name}-img`}
                     className='h-32 object-contain'
@@ -272,7 +278,11 @@ export default function HomePage() {
         {/* Right Side */}
         <div className='hello-content-right flex flex-col items-center md:items-start gap-6 md:w-1/2'>
           <div className='img-icon'>
-            <img
+            <Image
+              width={135}
+              height={135}
+              priority
+              quality={100}
               src='./landing/briefcase-icon.png'
               alt='Briefcase Icon'
               className='w-60 h-60 md:w-135 md:h-135'
@@ -283,7 +293,7 @@ export default function HomePage() {
               We are all about HR ease to support all HR functions
             </p>
             <p className='md:text-end'>
-              that could ease your business's HR operation and management.
+              that could ease your business&apos;s HR operation and management.
             </p>
             <p className='md:text-end'>
               Looking for HR Manager? Check out pricing or appoint for Demo
@@ -404,7 +414,9 @@ export default function HomePage() {
                     className='p-5 w-80'>
                     <div className='package border-2 border-[#8C97C9] rounded-sm px-6 py-4 gap-3 flex flex-col'>
                       <div className='icon bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center mb-2'>
-                        <img
+                        <Image
+                          width={24}
+                          height={24}
                           src={pkg.icon}
                           alt={pkg.type + "-icon"}
                           className='w-6 h-6'
@@ -458,7 +470,9 @@ export default function HomePage() {
                           key={dIdx}
                           className='block sm:table-cell p-3 sm:p-5 text-center'>
                           <div className='bg-[#B1BBE7] rounded-sm p-3 sm:p-5 flex items-center justify-center'>
-                            <img
+                            <Image
+                              width={24}
+                              height={24}
                               src='/companyLanding/checkbox-checked.png'
                               alt='checked'
                             />
