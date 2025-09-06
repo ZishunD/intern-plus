@@ -55,18 +55,18 @@ export default function Navbar({ routes }: NavbarProps) {
             {langOpen && (
               <ul className='absolute z-10 mt-1 bg-white border border-gray-200 rounded shadow w-28 text-xl text-gray-700'>
                 <li>
-                  <a
+                  <Link
                     href='#'
                     className='block px-3 py-2 hover:bg-gray-100'>
                     English
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href='#'
                     className='block px-3 py-2 hover:bg-gray-100'>
                     ภาษาไทย
-                  </a>
+                  </Link>
                 </li>
               </ul>
             )}
@@ -122,11 +122,11 @@ export default function Navbar({ routes }: NavbarProps) {
           ))}
 
           <span className='opacity-70 font-bold'>|</span>
-          <a
+          <Link
             href='#company'
             className='opacity-70'>
             Company Services
-          </a>
+          </Link>
 
           <Link
             href='/register'
@@ -162,11 +162,11 @@ export default function Navbar({ routes }: NavbarProps) {
 
           <hr className='border-gray-300' />
 
-          <a
+          <Link
             href='#company'
             className='opacity-70'>
             Company Services
-          </a>
+          </Link>
 
           <Link
             href='/register'

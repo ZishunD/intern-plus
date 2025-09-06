@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import PriceCard from "@/components/PriceCard";
 import ProductCard from "@/components/ProductCard";
+import Link from "next/link";
 
 export default function HomePage() {
   // services
@@ -142,28 +143,6 @@ export default function HomePage() {
     },
   ];
 
-  // temp (optional / additional products)
-  const temp = [
-    {
-      title: "Offboarding",
-      description:
-        "It is a process that helps in managing interns who are about to leave the organization or leave the internship. Documents related to offboarding can be viewed in an organized manner. Including internship evaluation documents, allowance payment documents, or documents required for processing.",
-      background: "",
-    },
-    {
-      title: "Assignment Management",
-      description:
-        "A system where interns submit assigned work and report their daily tasks on what work they did. HR can check the submitted work and approve the task on that day. Including expressing opinions and exchanging with interns through the comment section.",
-      background: "companyLanding/intern-data-management",
-    },
-    {
-      title: "Storage Management",
-      description:
-        "Managing data and resources stored in the system In order to access information efficiently and securely It will be stored in the format you want, such as a folder or file name. The system will save the origin of the file import to facilitate analysis of that data.",
-      background: "companyLanding/intern-data-management",
-    },
-  ];
-
   const [category, setCategory] = useState<"month" | "year">("month");
   const priceData = category === "month" ? monthly : yearly;
   const [expandedIndex, setExpandedIndex] = useState(0);
@@ -186,11 +165,11 @@ export default function HomePage() {
             Internship application system by Vanness Plus Consulting Co., Ltd.
           </h3>
           <div className='apply-button'>
-            <a
+            <Link
               href='/program'
               className='inline-block px-6 py-3 bg-[#474BC2] text-white rounded-sm hover:bg-gradient-to-r from-[#323438] via-[#474BC2] to-[#888BEA] transition duration-300'>
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -262,16 +241,16 @@ export default function HomePage() {
           </div>
 
           <div className='buttons flex gap-4 mt-6'>
-            <a
+            <Link
               href='#'
               className='free-trial px-20 py-5 bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition'>
               Free Trial
-            </a>
-            <a
+            </Link>
+            <Link
               href='#'
               className='demo px-20 py-5  bg-[#B1BBE7] rounded-sm hover:bg-[#9dabeb] '>
               Request Demo
-            </a>
+            </Link>
           </div>
         </div>
 

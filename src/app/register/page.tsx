@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { registerUser } from "../lib/graphql";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,11 +52,11 @@ export default function RegisterPage() {
       <div className='nav bg-white'>
         <div className='mx-10 flex items-center justify-between py-10 md:px-0'>
           <div className='flex items-center space-x-6'>
-            <a
+            <Link
               href='/'
               className='text-4xl font-semibold'>
               INTERNPLUS
-            </a>
+            </Link>
 
             {/* Language dropdown */}
             <div className='relative'>
@@ -205,18 +206,18 @@ function LanguageDropdown() {
       {open && (
         <ul className='absolute z-10 mt-1 bg-white border border-gray-200 rounded shadow w-28 text-xl text-gray-700'>
           <li>
-            <a
+            <Link
               href='#'
               className='block px-3 py-2 hover:bg-gray-100'>
               English
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href='#'
               className='block px-3 py-2 hover:bg-gray-100'>
               ภาษาไทย
-            </a>
+            </Link>
           </li>
         </ul>
       )}
@@ -333,11 +334,11 @@ function InputWithShow({ label, name, show, setShow, iconSrc }: any) {
 
 function SocialButton({ href, text, svg }: any) {
   return (
-    <a
+    <Link
       href={href}
       className='flex items-center space-x-2 justify-center border border-black border-solid py-2 rounded-sm text-center hover:bg-[#474BC2] hover:text-white transition'>
       {svg}
       <span>{text}</span>
-    </a>
+    </Link>
   );
 }
