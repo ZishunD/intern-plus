@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from "graphql-request";
 
-const ENDPOINT = "http://localhost:4000/query"; // 或者你部署的后端地址
+const ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_LINK+"/query"; // 或者你部署的后端地址
 const client = new GraphQLClient(ENDPOINT);
 
 export async function registerUser(input: {
