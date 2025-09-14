@@ -90,7 +90,9 @@ export default function EnterCode({ email, onVerified }: EnterCodeProps) {
               {code.map((digit, index) => (
                 <input
                   key={index}
-                  ref={(el) => (inputsRef.current[index] = el)}
+                  ref={(el) => {
+                    inputsRef.current[index] = el;
+                  }}
                   type='text'
                   maxLength={1}
                   value={digit}
