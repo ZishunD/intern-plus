@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from "graphql-request";
 
-const ENDPOINT = "https://intern-plus-backend.onrender.com/query"; // 或者你部署的后端地址
+const ENDPOINT = "http://localhost:4000/query"; // 或者你部署的后端地址
 const client = new GraphQLClient(ENDPOINT);
 
 export async function registerUser(input: {
@@ -28,4 +28,14 @@ export async function registerUser(input: {
   console.log("Sending input:", input);
 
   return client.request(mutation, { input });
+}
+
+//log in
+export async function loginIntern(email: string, password: string): Promise<{ loginIntern: string }>  {
+  const mutation = gql`
+    mutation LoginIntern($email: String!, $password: String!) {
+      loginIntern(email: $email, password: $password)
+    }
+  `;
+  return client.request(mutation, { email, password });
 }
