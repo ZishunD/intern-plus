@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import LanguageDropdown from "@/components/LanguageDropdown";
-import Image from "next/image";
 
 interface EnterCodeProps {
   email: string;

@@ -88,7 +88,7 @@ export default function NewPasswordPage({ email }: NewPasswordProps) {
   );
 }
 
-function InputWithShow({ label, name, show, setShow, iconSrc }: any) {
+function InputWithShow({ label, name, show, setShow }: any) {
   return (
     <div className='relative space-y-3'>
       <label htmlFor={name}>{label}</label>

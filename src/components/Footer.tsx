@@ -4,15 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-type Route = {
-  name: string;
-  path: string;
-};
-
-interface FooterProps {
-  routes: Route[];
-}
-
 const specialRoutes = [
   "/register",
   "/register/success",
@@ -23,7 +14,7 @@ const specialRoutes = [
   "/login/forgetpass/resetsuccessful",
 ];
 
-export default function Footer({ routes }: FooterProps) {
+export default function Footer() {
   const [email, setEmail] = useState("");
   const pathname = usePathname();
   if (specialRoutes.includes(pathname)) return null;
