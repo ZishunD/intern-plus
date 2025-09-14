@@ -18,7 +18,7 @@ export default function Package({ priceinfos }: PackageProps) {
   return (
     <>
       {/* 父容器 */}
-      <div className='flex space-x-4 overflow-x-auto sm:grid sm:grid-cols-3 sm:gap-6 sm:space-x-0'>
+      <div className='flex space-x-4 overflow-x-auto sm:flex-col sm:grid-cols-3 sm:gap-6 sm:space-x-0'>
         {priceinfos.map((priceinfo, idx) => (
           <div
             key={idx}

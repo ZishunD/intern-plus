@@ -14,11 +14,21 @@ interface NavbarProps {
   routes: Route[];
 }
 
+const specialRoutes = [
+  "/register",
+  "/register/success",
+  "/login",
+  "/login/forgetpass",
+  "/login/forgetpass/entercode",
+  "/login/forgetpass/newpassword",
+  "/login/forgetpass/resetsuccessful",
+];
+
 export default function Navbar({ routes }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const pathname = usePathname();
-  if (pathname === "/register") return null;
+  if (specialRoutes.includes(pathname)) return null;
 
   return (
     <nav

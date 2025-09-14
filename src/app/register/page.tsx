@@ -6,8 +6,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { registerUser } from "../lib/graphql";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import LanguageDropdown from "../../components/LanguageDropdown";
+import SocialButton from "../../components/SocialButton";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -39,8 +43,10 @@ export default function RegisterPage() {
         password,
       });
       console.log(data);
-      setSuccess("Registration successful!");
+      setSuccess("Registration successful! Please check your email.");
       setError("");
+
+      router.push("/register/success");
     } catch (err: any) {
       console.error(err);
       setError("Registration failed");
@@ -181,51 +187,6 @@ export default function RegisterPage() {
 }
 
 // ---------- Helper Components ---------- //
-
-function LanguageDropdown() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className='relative'>
-      <button
-        onClick={() => setOpen(!open)}
-        className='flex items-center space-x-1 text-xl font-medium'>
-        <span className='opacity-70'>EN</span>
-        <svg
-          className='w-4 h-4'
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'>
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M19 9l-7 7-7-7'
-          />
-        </svg>
-      </button>
-      {open && (
-        <ul className='absolute z-10 mt-1 bg-white border border-gray-200 rounded shadow w-28 text-xl text-gray-700'>
-          <li>
-            <Link
-              href='#'
-              className='block px-3 py-2 hover:bg-gray-100'>
-              English
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='#'
-              className='block px-3 py-2 hover:bg-gray-100'>
-              ภาษาไทย
-            </Link>
-          </li>
-        </ul>
-      )}
-    </div>
-  );
-}
-
 function InputWithIcon({ label, name, type = "text", iconSrc, required }: any) {
   return (
     <div className='relative space-y-3'>
@@ -330,16 +291,5 @@ function InputWithShow({ label, name, show, setShow, iconSrc }: any) {
         )}
       </button>
     </div>
-  );
-}
-
-function SocialButton({ href, text, svg }: any) {
-  return (
-    <Link
-      href={href}
-      className='flex items-center space-x-2 justify-center border border-black border-solid py-2 rounded-sm text-center hover:bg-[#474BC2] hover:text-white transition'>
-      {svg}
-      <span>{text}</span>
-    </Link>
   );
 }

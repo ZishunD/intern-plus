@@ -286,7 +286,7 @@ export default function HomePage() {
       {/* Detailed About Us */}
       <div className='about-us bg-white px-6 md:px-20 py-16 flex flex-col md:flex-row gap-12 my-10'>
         {/* Left About */}
-        <div className='left-about md:w-1/2 flex flex-col gap-6'>
+        <div className='left-about sm:w-full md:w-1/2 flex flex-col gap-6'>
           {/*  Title  */}
           <div className='title text-4xl font-extrabold text-[#323438]'>
             About Us
@@ -296,8 +296,8 @@ export default function HomePage() {
           <div className='divider w-full h-1 bg-[#474BC2]'></div>
 
           {/*  Paragraph */}
-          <div className='paragraph text-lg font-medium text-[#323438] leading-relaxed space-y-4 md:pt-40'>
-            <p className='w-3/4'>
+          <div className='paragraph text-lg font-medium text-[#323438] leading-relaxed space-y-4 sm:pt-10 md:pt-40'>
+            <p className='w-3/4 sm:w-full'>
               Recruiting interns is hard or even harder this time. You just need
               a reliable HR who could do these jobs along with our tool. Your
               Human Resource Management would become easy tasks for your team
@@ -313,7 +313,7 @@ export default function HomePage() {
         <div className='right-about md:w-1/2 flex flex-col gap-6 md:pt-15'>
           {/* Top paragraph */}
           <div className='paragraph text-lg font-medium text-[#323438] leading-relaxed'>
-            <p className='w-3/4'>
+            <p className='w-3/4 sm:w-full '>
               All in one HRM application to support your business on HR
               operation cloud based, available ANY TIME & ANY WHERE now.
               InternPlus is flexible and easy to use regardless of your desire.
@@ -479,7 +479,7 @@ export default function HomePage() {
         <div className='title text-3xl font-bold mb-8'>
           Product & Services Elements
         </div>
-        <div className='grid grid-cols-8 gap-10 p-10 h-full'>
+        <div className='xl:grid xl:grid-cols-8 gap-10 p-10 h-full flex flex-col'>
           {products.map((product, index) => (
             <ProductCard
               key={index}

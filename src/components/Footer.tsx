@@ -4,10 +4,29 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-export default function Footer() {
+type Route = {
+  name: string;
+  path: string;
+};
+
+interface FooterProps {
+  routes: Route[];
+}
+
+const specialRoutes = [
+  "/register",
+  "/register/success",
+  "/login",
+  "/login/forgetpass",
+  "/login/forgetpass/entercode",
+  "/login/forgetpass/newpassword",
+  "/login/forgetpass/resetsuccessful",
+];
+
+export default function Footer({ routes }: FooterProps) {
   const [email, setEmail] = useState("");
   const pathname = usePathname();
-  if (pathname === "/register") return null;
+  if (specialRoutes.includes(pathname)) return null;
 
   return (
     <div className='footer px-6 py-10 text-gray-800 text-sm font-[Fustat]'>
