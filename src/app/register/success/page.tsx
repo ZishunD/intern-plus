@@ -42,7 +42,9 @@ export default function SuccessPage() {
           <div className='text mb-5'>
             We have successfully received your registration.
           </div>
-          <div className='login-button border rounded py-2 px-5 text-white bg-[#474BC2] hover:bg-[#F3F5FC] hover:text-[#474BC2] transition'>
+          <div
+            className='login-button border rounded py-2 px-5 text-white bg-[#474BC2] hover:bg-[#F3F5FC] hover:text-[#474BC2] transition'
+            onClick={() => (window.location.href = "/login")}>
             Login
           </div>
         </div>
