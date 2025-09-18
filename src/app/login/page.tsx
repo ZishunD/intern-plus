@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { loginIntern } from "../lib/graphql";
+import { loginIntern } from "../lib/graphql/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LanguageDropdown from "../../components/LanguageDropdown";
