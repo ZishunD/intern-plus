@@ -2,7 +2,7 @@
 // app/register/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { loginIntern } from "../lib/graphql";
 import Link from "next/link";
@@ -14,9 +14,20 @@ export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setShowError(true); // 显示错误
+      const timer = setTimeout(() => setShowError(false), 1000); // 3秒后开始淡出
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -32,6 +43,8 @@ export default function LoginPage() {
       router.push("/dashboard"); // 登录成功跳转
     } catch (err: any) {
       setError("Login failed");
+    } finally {
+      setLoading(false); // 请求结束，无论成功或失败都恢复
     }
   };
 
@@ -73,7 +86,15 @@ export default function LoginPage() {
         <div className='md:w-1/2 flex items-center justify-center p-6'>
           <div className='w-full max-w-md p-6'>
             <h2 className='text-4xl font-extrabold uppercase mb-6'>Register</h2>
-            {error && <p className='text-red-500 mt-2'>{error}</p>}
+            {error && (
+              <p
+                className={`text-red-500 mt-2 transition-opacity duration-500 ease-out ${
+                  showError ? "opacity-100" : "opacity-0"
+                }`}>
+                {error}
+              </p>
+            )}
+
             <form
               onSubmit={handleLogin}
               className='space-y-4'>
@@ -114,8 +135,32 @@ export default function LoginPage() {
 
               <button
                 type='submit'
-                className='w-full bg-[#474BC2] text-white py-2 rounded-sm hover:bg-blue-600'>
-                Log In
+                disabled={loading}
+                className='w-full bg-[#474BC2] text-white py-2 rounded-sm hover:bg-blue-600 flex items-center justify-center space-x-2'>
+                {loading ? (
+                  <>
+                    <svg
+                      className='h-5 w-5 animate-spin text-white'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'>
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'></circle>
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z'></path>
+                    </svg>
+                    <span>Logging in...</span>
+                  </>
+                ) : (
+                  "Log In"
+                )}
               </button>
             </form>
 

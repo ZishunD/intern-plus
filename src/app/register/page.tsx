@@ -4,7 +4,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { registerUser } from "../lib/graphql";
+import { registerCompany } from "../lib/graphql/company";
+import { registerIntern } from "../lib/graphql/intern";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LanguageDropdown from "../../components/LanguageDropdown";
@@ -14,9 +15,9 @@ export default function RegisterPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [userType, setUserType] = useState<"intern" | "company">("intern"); // Default to "intern"
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,13 +37,22 @@ export default function RegisterPage() {
     }
 
     try {
-      const data = await registerUser({
-        first_name,
-        last_name,
-        email,
-        password,
-      });
-      console.log(data);
+      if (userType === "intern") {
+        const data = await registerIntern({
+          first_name,
+          last_name,
+          email,
+          password,
+        });
+      } else {
+        // Handle company registration logic here
+        const data = await registerCompany({
+          first_name,
+          last_name,
+          email,
+          password,
+        });
+      }
       setSuccess("Registration successful! Please check your email.");
       setError("");
 
@@ -91,6 +101,28 @@ export default function RegisterPage() {
         <div className='md:w-1/2 flex items-center justify-center p-6'>
           <div className='w-full max-w-md p-6'>
             <h2 className='text-4xl font-extrabold uppercase mb-6'>Register</h2>
+            <div className='flex justify-center mb-4 space-x-4'>
+              <button
+                type='button'
+                className={`px-4 py-2 rounded-sm ${
+                  userType === "intern"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => setUserType("intern")}>
+                Individual
+              </button>
+              <button
+                type='button'
+                className={`px-4 py-2 rounded-sm ${
+                  userType === "company"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => setUserType("company")}>
+                Company
+              </button>
+            </div>
             {error && <p className='text-red-500 mt-2'>{error}</p>}
             {success && <p className='text-green-500 mt-2'>{success}</p>}
             <form
@@ -204,7 +236,7 @@ function InputWithIcon({ label, name, type = "text", iconSrc, required }: any) {
         id={name}
         name={name}
         required={required}
-        className='w-full pl-10 pr-3 py-2 rounded-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+        className='w-full pl-10 pr-3 py-2 rounded-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white'
       />
     </div>
   );
@@ -226,7 +258,7 @@ function InputWithShow({ label, name, show, setShow, iconSrc }: any) {
         type={show ? "text" : "password"}
         id={name}
         name={name}
-        className='w-full pl-10 pr-10 py-2 rounded-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+        className='w-full pl-10 pr-10 py-2 rounded-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white'
       />
       <button
         type='button'
