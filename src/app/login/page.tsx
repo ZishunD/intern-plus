@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // app/register/page.tsx
 "use client";
@@ -42,7 +41,7 @@ export default function LoginPage() {
         sessionStorage.setItem("token", token); // 会话存储
       }
       router.push("/dashboard"); // 登录成功跳转
-    } catch (err: any) {
+    } catch {
       setError("Login failed");
     } finally {
       setLoading(false); // 请求结束，无论成功或失败都恢复

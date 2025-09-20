@@ -1,9 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
-import { useState, useEffect, use } from "react";
+import { useState } from "react";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +14,7 @@ type JobInfo = {
 };
 
 export default function ApplyPage() {
-  const [program, setProgram] = useState<JobInfo | null>(() => {
+  const [program] = useState<JobInfo | null>(() => {
     const stored = sessionStorage.getItem("selectedProgram");
     return stored ? JSON.parse(stored) : null;
   });
@@ -37,7 +35,7 @@ export default function ApplyPage() {
         await navigator.share(shareData);
         console.log("Shared successfully!");
       } catch (err) {
-        console.error("Error sharing:", err);
+        console.error("Error sharing:", err, copied);
       }
     } else {
       try {
