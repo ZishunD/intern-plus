@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // app/register/page.tsx
 "use client";
 
@@ -58,7 +59,6 @@ export default function RegisterPage() {
 
       router.push("/register/success");
     } catch (err: any) {
-      console.error(err);
       setError("Registration failed");
     }
   };
