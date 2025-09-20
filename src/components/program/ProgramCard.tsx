@@ -1,5 +1,6 @@
 "use client";
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProgramCardProps {
   info: JobInfo;
@@ -22,6 +23,13 @@ const bgImages = [
 ];
 
 export default function ProgramCard({ info }: ProgramCardProps) {
+  const router = useRouter();
+
+  const handleApply = () => {
+    sessionStorage.setItem("selectedProgram", JSON.stringify(info));
+    router.push("/program/apply");
+  };
+
   const randomBg = useMemo(() => {
     return bgImages[Math.floor(Math.random() * bgImages.length)];
   }, []);
@@ -46,7 +54,11 @@ export default function ProgramCard({ info }: ProgramCardProps) {
         <div
           className='right relative bg-contain bg-no-repeat bg-center w-1/3 rounded rounded-l-none'
           style={{ backgroundImage: `url(${randomBg})` }}>
-          <div className='apply-button bg-[#474BC2] absolute bottom-[10%] right-[10%] px-5 py-2 text-sm font-light rounded text-white cursor-pointer'>
+          <div
+            className='apply-button bg-[#474BC2] absolute bottom-[10%] right-[10%] px-5 py-2 text-sm font-light rounded text-white cursor-pointer'
+            onClick={() => {
+              handleApply();
+            }}>
             Apply
           </div>
         </div>

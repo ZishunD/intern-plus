@@ -31,6 +31,7 @@ export async function getProgramByCategory(category: string): Promise<{ internPr
         description
         category
         total_positions
+        location
       }
     }
   `;

@@ -118,7 +118,9 @@ export default function ProgramPage() {
           {buttons.map((btn) => (
             <button
               key={btn.key}
-              onClick={() => setChoice(btn.key)}
+              onClick={() => {
+                setChoice(btn.key);
+              }}
               className={`capitalize py-2 px-7 rounded transition 
             ${choice === btn.key ? "bg-[#B1BBE7]" : "bg-transparent border"}`}>
               {btn.label}

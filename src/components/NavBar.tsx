@@ -21,6 +21,7 @@ const specialRoutes = [
   "/login/forgetpass/entercode",
   "/login/forgetpass/newpassword",
   "/login/forgetpass/resetsuccessful",
+  "/program/apply/success",
 ];
 
 export default function Navbar({ routes }: NavbarProps) {

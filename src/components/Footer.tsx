@@ -12,6 +12,8 @@ const specialRoutes = [
   "/login/forgetpass/entercode",
   "/login/forgetpass/newpassword",
   "/login/forgetpass/resetsuccessful",
+  "/program/apply",
+  "/program/apply/success",
 ];
 
 export default function Footer() {
