@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
     try {
       if (userType === "intern") {
-        const data = await registerIntern({
+        await registerIntern({
           first_name,
           last_name,
           email,
@@ -47,7 +47,7 @@ export default function RegisterPage() {
         });
       } else {
         // Handle company registration logic here
-        const data = await registerCompany({
+        await registerCompany({
           first_name,
           last_name,
           email,
@@ -58,7 +58,7 @@ export default function RegisterPage() {
       setError("");
 
       router.push("/register/success");
-    } catch (err: any) {
+    } catch {
       setError("Registration failed");
     }
   };
