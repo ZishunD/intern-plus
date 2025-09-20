@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
@@ -15,7 +16,10 @@ type JobInfo = {
 
 export default function ApplyPage() {
   const [program] = useState<JobInfo | null>(() => {
-    const stored = sessionStorage.getItem("selectedProgram");
+    let stored: any;
+    if (typeof window !== "undefined") {
+      stored = sessionStorage.getItem("selectedProgram");
+    }
     return stored ? JSON.parse(stored) : null;
   });
   const router = useRouter();

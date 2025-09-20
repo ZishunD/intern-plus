@@ -8,7 +8,10 @@ export default function SuccessPage() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const saved = sessionStorage.getItem("applicationData");
+    const saved =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("applicationData")
+        : null;
     if (saved) setData(JSON.parse(saved));
   }, []);
 
