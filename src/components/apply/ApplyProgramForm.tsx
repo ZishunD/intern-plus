@@ -173,11 +173,14 @@ export default function ApplyProgramForm() {
       formData.append("0", form.resumeFile as File);
       if (form.portfolioFile) formData.append("1", form.portfolioFile as File);
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/graphql`, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_GRAPHQL_LINK}/graphql`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (data.errors) {
