@@ -195,7 +195,7 @@ export default function ApplyProgramForm() {
       route.push("/program/apply/success");
     } catch (err: any) {
       console.error("Apply failed:", err);
-      if (err === "No account found. Please register first.") {
+      if (err.message.includes("No account found")) {
         setErrorMessage("No account found. Please register first.");
         setTimeout(() => setErrorMessage(""), 2000);
       } else {
