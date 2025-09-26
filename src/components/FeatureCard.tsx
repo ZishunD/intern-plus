@@ -1,7 +1,5 @@
 // components/FeatureCard.tsx
 "use client";
-
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface Feature {
@@ -22,7 +20,11 @@ export default function ProductCard({ feature, index }: FeatureCardProps) {
       className={`relative h-full w-full m-auto border border-[#8C97C9] rounded p-10 pt-70 bg-cover bg-no-repeat transition-all duration-300 overflow-x-auto 
       `}>
       {/* Description */}
-      <div className='description bg-[#F3F5FC] border-[#B1BBE7] border p-10 rounded-lg flex-grow overflow-hidden origin-top-left transform scale-100 sm:scale-90 xs:scale-80 mx-auto max-w-[1440px]'>
+      <div
+        className={
+          index +
+          `description bg-[#F3F5FC] border-[#B1BBE7] border p-10 rounded-lg flex-grow overflow-hidden origin-top-left transform scale-100 sm:scale-90 xs:scale-80 mx-auto max-w-[1440px]`
+        }>
         {/* Title */}
         <div className='title mb-5 text-start font-bold text-xl origin-top-left transform scale-100 sm:scale-90 xs:scale-80 mx-auto max-w-[1440px]'>
           {feature.title}

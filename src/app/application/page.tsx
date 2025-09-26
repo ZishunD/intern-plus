@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import ApplicationCard from "@/components/application/ApplicationCard";
 import WrongMessage from "@/components/WrongMessage";
 import getApplicationById from "../lib/graphql/application";
@@ -20,16 +20,6 @@ export default function ApplicationPage() {
   const [wrongMessage, setWrongMessage] = useState("");
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const [application, setApplication] = useState<Application | null>(null);
-
-  const testApplication = {
-    status: "Pending",
-    title: "Frontend Intern",
-    location: "Bangkok, Thailand",
-    start_date: new Date("2025-10-01"),
-    end_date: new Date("2025-12-31"),
-    application_id: "APP123456",
-    type: "hybrid",
-  };
 
   const handleChange = (index: number, value: string) => {
     const digit = value.slice(-1); // 取最后一位
@@ -65,7 +55,7 @@ export default function ApplicationPage() {
     */
     if (!values.includes("")) {
       try {
-        let res = await getApplicationById(values.join(""));
+        const res = await getApplicationById(values.join(""));
         setApplication(res);
       } catch {
         setWrongMessage("Wrong Application ID");
