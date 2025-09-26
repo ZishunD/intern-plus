@@ -1,3 +1,5 @@
+"use client";
+
 // components/Package.tsx
 import Image from "next/image";
 
@@ -18,23 +20,23 @@ export default function Package({ priceinfos }: PackageProps) {
   return (
     <>
       {/* 父容器 */}
-      <div className='flex space-x-4 overflow-x-auto sm:flex-col sm:grid-cols-3 sm:gap-6 sm:space-x-0'>
+      <div className='flex space-x-4 overflow-x-auto flex-row'>
         {priceinfos.map((priceinfo, idx) => (
           <div
             key={idx}
             className={`${
               priceinfo.type === "Standard" ? "bg-[#D1D1F0] relative" : ""
-            } pt-15 pr-3 pl-3 pb-3 rounded-sm w-80 sm:w-full shrink-0 sm:shrink sm:max-w-sm text-[#323438]`}>
+            } pt-15 pr-3 pl-3 pb-3 rounded-sm w-80 text-[#323438]`}>
             {/* Best Deal Label */}
             <div
               className={`${
                 priceinfo.type === "Standard" ? "" : "hidden"
-              } best-deal-label font-extrabold text-xl sm:text-2xl rounded self-start sm:absolute sm:inset-x-0 sm:inset-y-3`}>
+              } best-deal-label font-extrabold text-2xl rounded self-start absolute inset-x-0 inset-y-3`}>
               Best Deal
             </div>
 
             {/* Card */}
-            <div className='package-card rounded flex flex-col justify-between p-4 h-full w-full space-y-5 border-2 border-[#8C97C9] bg-white'>
+            <div className='package-card rounded flex flex-col justify-between p-4 h-full w-full space-y-5 border-2 border-[#8C97C9] bg-white origin-top-left transform scale-100 sm:scale-90 xs:scale-80 mx-auto max-w-[1440px]'>
               {/* Icon */}
               <div className='icon bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center mb-2'>
                 <Image

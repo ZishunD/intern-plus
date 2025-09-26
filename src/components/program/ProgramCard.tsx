@@ -7,6 +7,7 @@ interface ProgramCardProps {
 }
 
 type JobInfo = {
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -26,8 +27,7 @@ export default function ProgramCard({ info }: ProgramCardProps) {
   const router = useRouter();
 
   const handleApply = () => {
-    sessionStorage.setItem("selectedProgram", JSON.stringify(info));
-    router.push("/program/apply");
+    router.push(`/program/apply?id=${info.id}`);
   };
 
   const randomBg = useMemo(() => {

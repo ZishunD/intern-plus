@@ -7,6 +7,7 @@ import {
   getProgramSum,
   getPositionSum,
   getCategorySum,
+  searchPrograms,
 } from "../lib/graphql/programs";
 
 export default function ProgramPage() {
@@ -26,6 +27,7 @@ export default function ProgramPage() {
   const [programSum, setProgramSum] = useState(0);
   const [positionSum, setPositionSum] = useState(0);
   const [categorySum, setCategorySum] = useState<CategorySum[]>([]);
+  const [search, setSearch] = useState("");
   const buttons = [
     { key: "it", label: "it" },
     { key: "marketing", label: "marketing" },
@@ -36,10 +38,17 @@ export default function ProgramPage() {
 
   // Fetch programs whenever the category changes
   useEffect(() => {
-    getProgramByCategory(choice)
-      .then((data) => setPrograms(data.internPrograms || []))
-      .catch((err) => console.error(err));
-  }, [choice]);
+    if (!search.trim()) {
+      getProgramByCategory(choice)
+        .then((data) => setPrograms(data.internPrograms || []))
+        .catch((err) => console.error(err));
+    } else {
+      // fallback to category programs
+      getProgramByCategory(choice)
+        .then((data) => setPrograms(data.internPrograms || []))
+        .catch(console.error);
+    }
+  }, [choice, search]);
 
   // Fetch summary stats only once when component mounts
   useEffect(() => {
@@ -55,6 +64,19 @@ export default function ProgramPage() {
       .then((data) => setCategorySum(data.categorySum || []))
       .catch((err) => console.error(err));
   }, []);
+
+  const handleSearch = () => {
+    if (search.trim()) {
+      searchPrograms(search)
+        .then((data) => setPrograms(data.programs || []))
+        .catch((err) => console.error(err));
+    } else {
+      // fallback to category
+      getProgramByCategory(choice)
+        .then((data) => setPrograms(data.internPrograms || []))
+        .catch((err) => console.error(err));
+    }
+  };
 
   return (
     <>
@@ -94,11 +116,20 @@ export default function ProgramPage() {
         </div>
         <div className='searchBar flex items-center justify-between p-2 rounded-md mt-10 mx-auto w-[90%]'>
           <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
             type='text'
             placeholder='Enter the program you are interested in...'
             className='px-4 py-2 bg-[#F3F5FC] rounded-sm rounded-r-none shadow w-full focus:outline-none'
           />
-          <div className='search-icon bg-[#474BC2] p-2 rounded-sm rounded-l-none cursor-pointer'>
+          <div
+            className='search-icon bg-[#474BC2] p-2 rounded-sm rounded-l-none cursor-pointer'
+            onClick={handleSearch}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6 text-white'
@@ -122,7 +153,11 @@ export default function ProgramPage() {
                 setChoice(btn.key);
               }}
               className={`capitalize py-2 px-7 rounded transition 
-            ${choice === btn.key ? "bg-[#B1BBE7]" : "bg-transparent border"}`}>
+            ${
+              choice === btn.key && search === ""
+                ? "bg-[#B1BBE7]"
+                : "bg-transparent border"
+            }`}>
               {btn.label}
             </button>
           ))}

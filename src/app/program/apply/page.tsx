@@ -2,28 +2,44 @@
 "use client";
 
 import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { searchProgramById } from "@/app/lib/graphql/programs";
 
 type JobInfo = {
+  id: number;
   title: string;
   description: string;
   category: string;
   total_positions: number;
-  location: string;
+  location?: string | null;
 };
 
 export default function ApplyPage() {
-  const [program] = useState<JobInfo | null>(() => {
-    let stored: any;
-    if (typeof window !== "undefined") {
-      stored = sessionStorage.getItem("selectedProgram");
-    }
-    return stored ? JSON.parse(stored) : null;
-  });
+  const programId = useSearchParams().get("id");
+  const [program, setProgram] = useState<JobInfo | null>(null);
   const router = useRouter();
   const [copied, setCopied] = useState(false);
+
+  console.log(programId);
+
+  useEffect(() => {
+    if (!programId) return;
+
+    const fetchProgram = async () => {
+      try {
+        const result = await searchProgramById(programId);
+        setProgram(result.program);
+        console.log(result.program);
+      } catch (error) {
+        console.error("Failed to fetch program:", error);
+        setProgram(null);
+      }
+    };
+
+    fetchProgram();
+  }, [programId]);
 
   if (!program) return <Loading />;
 

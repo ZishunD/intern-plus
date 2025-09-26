@@ -21,6 +21,43 @@ interface CategoryResponse{
   }[];
 }
 
+//search program by id
+export async function searchProgramById(id:string): Promise<{program:Program}>{
+  const query = gql`
+    query SearchProgramById($id: ID!) {
+      program(id: $id) {
+        id
+        title
+        description
+        category
+        total_positions
+        location
+      }
+    }
+  `;
+
+
+  return await client.request<{program:Program}>(query, { id })
+}
+
+// Search programs by keyword
+export async function searchPrograms(key: string): Promise<{ programs: Program[] }> {
+  const query = gql`
+    query SearchPrograms($key: String!) {
+      programs(key: $key) {
+        id
+        title
+        description
+        category
+        total_positions
+        location
+      }
+    }
+  `;
+
+  return await client.request<{ programs: Program[] }>(query, { key });
+}
+
 // 根据 title 获取实习项目
 export async function getProgramByCategory(category: string): Promise<{ internPrograms: Program[] }> {
   const query = gql`
