@@ -19,12 +19,17 @@ type JobInfo = {
 
 export default function ApplyPage() {
   const searchParams = useSearchParams();
-  const programId = searchParams.get("id");
+  const [programId, setProgramId] = useState<string | null>(null);
   const [program, setProgram] = useState<JobInfo | null>(null);
   const router = useRouter();
   const [copied, setCopied] = useState(false);
 
   console.log(programId);
+
+  useEffect(() => {
+    const id = searchParams.get("id");
+    setProgramId(id);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!programId) return;
