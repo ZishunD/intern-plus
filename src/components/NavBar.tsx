@@ -134,7 +134,7 @@ export default function Navbar({ routes }: NavbarProps) {
 
           <span className='opacity-70 font-bold'>|</span>
           <Link
-            href='#company'
+            href='/#company'
             className='opacity-70'>
             Company Services
           </Link>
@@ -174,7 +174,7 @@ export default function Navbar({ routes }: NavbarProps) {
           <hr className='border-gray-300' />
 
           <Link
-            href='#company'
+            href='/#company'
             className='opacity-70'>
             Company Services
           </Link>
