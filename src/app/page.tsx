@@ -13,8 +13,7 @@ export default function HomePage() {
   const services = [
     {
       name: "INTERNSHIP",
-      description:
-        "This website is the company&apos;s operating system for students throughout their internship until the end.",
+      description: `This website is the company\'s operating system for students throughout their internship until the end.`,
       url: "/landing/briefcase-icon.png",
     },
     {
@@ -190,8 +189,7 @@ export default function HomePage() {
     [
       {
         title: "Ability testing system",
-        description:
-          "There is a system to create a test for applicants for each position. To test the applicant's specific potential in that field.",
+        description: `There is a system to create a test for applicants for each position. To test the applicant\'s specific potential in that field.`,
         background: "companyLanding/upcoming/20.png",
       },
       {
@@ -223,11 +221,15 @@ export default function HomePage() {
   };
 
   const prevFeatureSlide = () => {
-    setCurrentGroup((prev) => (prev === 0 ? newFeatures.length - 1 : prev - 1));
+    setCurrentFeatureGroup((prev) =>
+      prev === 0 ? newFeatures.length - 1 : prev - 1
+    );
   };
 
   const nextFeatureSlide = () => {
-    setCurrentGroup((prev) => (prev === newFeatures.length - 1 ? 0 : prev + 1));
+    setCurrentFeatureGroup((prev) =>
+      prev === newFeatures.length - 1 ? 0 : prev + 1
+    );
   };
 
   return (
@@ -717,7 +719,7 @@ export default function HomePage() {
         <div>
           {/*  Title  */}
           <div className='font-[#323438] mb-5 title text-4xl font-extrabold text-[#323438]'>
-            What's Upcoming Features
+            What&apos;s Upcoming Features
           </div>
 
           {/*  Divider */}
@@ -736,6 +738,138 @@ export default function HomePage() {
               index={index}
             />
           ))}
+        </div>
+        <div className='buttons col-start-8 row-start-2 flex justify-end items-center space-x-3'>
+          <button
+            onClick={prevSlide}
+            disabled={currentFeatureGroup === 0}
+            className='p-3 bg-white rounded-full cursor-pointer'>
+            <svg
+              width='35'
+              height='35'
+              viewBox='0 0 35 35'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
+              {currentFeatureGroup === 0 ? (
+                <>
+                  <g opacity='0.6'>
+                    <path
+                      d='M24.5 16.6992H10.4547'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                    <path
+                      d='M17.4766 23.269L10.4539 16.6995L17.4766 10.1299'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                    <circle
+                      cx='17.0884'
+                      cy='17.0874'
+                      r='15.8374'
+                      transform='rotate(180 17.0884 17.0874)'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                    />
+                  </g>
+                </>
+              ) : (
+                <>
+                  <path
+                    d='M24.5 16.6992H10.4547'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                  <path
+                    d='M17.4766 23.269L10.4539 16.6995L17.4766 10.1299'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                  <circle
+                    cx='17.9116'
+                    cy='17.0874'
+                    r='15.8374'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                  />
+                </>
+              )}
+            </svg>
+          </button>
+
+          {/* 右箭头 */}
+          <button
+            onClick={nextSlide}
+            disabled={currentFeatureGroup === 1}
+            className='p-3 bg-white rounded-full cursor-pointer'>
+            <svg
+              width='35'
+              height='35'
+              viewBox='0 0 35 35'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
+              {currentFeatureGroup === 1 ? (
+                <>
+                  <g opacity='0.6'>
+                    <path
+                      d='M10.5 17.4756H24.5453'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                    <path
+                      d='M17.5234 10.9058L24.5461 17.4753L17.5234 24.0449'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                    <circle
+                      cx='17.0884'
+                      cy='17.0874'
+                      r='15.8374'
+                      transform='rotate(180 17.0884 17.0874)'
+                      stroke='#898989'
+                      strokeWidth='2.5'
+                    />
+                  </g>
+                </>
+              ) : (
+                <>
+                  <path
+                    d='M10.5 17.4756H24.5453'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                  <path
+                    d='M17.5234 10.9058L24.5461 17.4753L17.5234 24.0449'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                  <circle
+                    cx='17.9116'
+                    cy='17.0874'
+                    r='15.8374'
+                    stroke='#323438'
+                    strokeWidth='2.5'
+                  />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
       </div>
     </>
