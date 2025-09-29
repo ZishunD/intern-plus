@@ -4,7 +4,6 @@ import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import { useRouter, useSearchParams } from "next/navigation";
-import { searchProgramById } from "@/app/lib/graphql/programs";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +35,9 @@ export default function ApplyPage() {
 
     const fetchProgram = async () => {
       try {
+        const { searchProgramById } = await import(
+          "@/app/lib/graphql/programs"
+        );
         const result = await searchProgramById(programId);
         setProgram(result.program);
         console.log(result.program);
