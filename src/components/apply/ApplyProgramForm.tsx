@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import Calendar from "./Calendar";
 import { useRouter } from "next/navigation";
 
+interface ApplyProgramFormProps {
+  programId: string;
+}
+
 interface ApplyForm {
   fname: string;
   lname: string;
@@ -18,10 +22,11 @@ interface ApplyForm {
   program_id?: string;
 }
 
-export default function ApplyProgramForm() {
+export default function ApplyProgramForm({ programId }: ApplyProgramFormProps) {
   const today = new Date();
   const route = useRouter();
 
+  console.log("Program ID in form:", programId);
   const [type, setType] = useState("");
   const [cvfile, setCvfile] = useState<string>("Select a file to upload");
   const [portfolio, setPortfolio] = useState<string>("Select a file to upload");
@@ -39,15 +44,8 @@ export default function ApplyProgramForm() {
     internshipType: "",
     resumeFile: null,
     portfolioFile: null,
+    program_id: programId,
   });
-
-  useEffect(() => {
-    const stored = sessionStorage.getItem("selectedProgram");
-    if (stored) {
-      const program = JSON.parse(stored);
-      setForm((prev) => ({ ...prev, program_id: program.id }));
-    }
-  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -69,6 +67,10 @@ export default function ApplyProgramForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    if (!programId) {
+      throw new Error("Program ID is required to apply for an internship!");
+    }
 
     // 检查必填字段
     const requiredFields: (keyof ApplyForm)[] = [

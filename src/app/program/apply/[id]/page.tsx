@@ -106,7 +106,7 @@ export default function ApplyPage({ params }: PageProps) {
       <div className='divider border w-full mt-10 border-[#C1C7CD]'></div>
 
       <div className='form mx-10 mt-10'>
-        <ApplyProgramForm />
+        <ApplyProgramForm programId={id} />
       </div>
     </div>
   );
