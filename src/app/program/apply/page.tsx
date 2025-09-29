@@ -1,4 +1,5 @@
-"use client";
+export const dynamic = "force-dynamic";
+("use client");
 
 import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
 import { useState, useEffect } from "react";
