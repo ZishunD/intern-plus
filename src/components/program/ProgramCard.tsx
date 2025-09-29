@@ -27,7 +27,7 @@ export default function ProgramCard({ info }: ProgramCardProps) {
   const router = useRouter();
 
   const handleApply = () => {
-    router.push(`/program/apply?id=${info.id}`);
+    router.push(`/program/apply/${info.id}`);
   };
 
   const randomBg = useMemo(() => {
