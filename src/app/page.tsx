@@ -741,7 +741,7 @@ export default function HomePage() {
         </div>
         <div className='buttons col-start-8 row-start-2 flex justify-end items-center space-x-3'>
           <button
-            onClick={prevSlide}
+            onClick={prevFeatureSlide}
             disabled={currentFeatureGroup === 0}
             className='p-3 bg-white rounded-full cursor-pointer'>
             <svg
@@ -807,7 +807,7 @@ export default function HomePage() {
 
           {/* 右箭头 */}
           <button
-            onClick={nextSlide}
+            onClick={nextFeatureSlide}
             disabled={currentFeatureGroup === 1}
             className='p-3 bg-white rounded-full cursor-pointer'>
             <svg
