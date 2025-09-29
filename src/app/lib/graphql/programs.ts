@@ -8,6 +8,7 @@ interface Program {
   description: string;
   category: string;
   total_positions: number;
+  location:string | null;
 }
 
 interface SumResponse{
