@@ -1,11 +1,12 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import ApplyProgramForm from "@/components/apply/ApplyProgramForm";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import { useRouter, useSearchParams } from "next/navigation";
 import { searchProgramById } from "@/app/lib/graphql/programs";
+
+export const dynamic = "force-dynamic";
 
 type JobInfo = {
   id: number;
@@ -17,7 +18,8 @@ type JobInfo = {
 };
 
 export default function ApplyPage() {
-  const programId = useSearchParams().get("id");
+  const searchParams = useSearchParams();
+  const programId = searchParams.get("id");
   const [program, setProgram] = useState<JobInfo | null>(null);
   const router = useRouter();
   const [copied, setCopied] = useState(false);
@@ -44,6 +46,9 @@ export default function ApplyPage() {
   if (!program) return <Loading />;
 
   const handleShare = async () => {
+    if (typeof window === "undefined" || typeof navigator === "undefined")
+      return;
+
     const shareData = {
       title: "Internship Program",
       text: "Check out this internship program!",
