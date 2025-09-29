@@ -12,7 +12,7 @@ import {
 
 export default function ProgramPage() {
   interface Program {
-    id: number;
+    id: string;
     title: string;
     description: string;
     category: string;

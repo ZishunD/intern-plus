@@ -4,7 +4,7 @@ import { useState } from "react";
 import ProgramCard from "./ProgramCard";
 
 type JobInfo = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;

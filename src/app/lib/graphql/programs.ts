@@ -3,7 +3,7 @@ import { gql } from "graphql-request";
 import { client } from "./client";
 
 interface Program {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -23,23 +23,27 @@ interface CategoryResponse{
 }
 
 //search program by id
-export async function searchProgramById(id:string): Promise<{program:Program}>{
-  const query = gql`
-    query SearchProgramById($id: ID!) {
-      program(id: $id) {
-        id
-        title
-        description
-        category
-        total_positions
-        location
+export async function searchProgramById(id: string): Promise<{ program: Program | null }> {
+  try {
+    const query = gql`
+      query SearchProgramById($id: ID!) {
+        program(id: $id) {
+          id
+          title
+          description
+          category
+          total_positions
+          location
+        }
       }
-    }
-  `;
-
-
-  return await client.request<{program:Program}>(query, { id })
+    `;
+    return await client.request<{ program: Program }>(query, { id });
+  } catch (err) {
+    console.error("searchProgramById failed:", err);
+    return { program: null };
+  }
 }
+
 
 // Search programs by keyword
 export async function searchPrograms(key: string): Promise<{ programs: Program[] }> {

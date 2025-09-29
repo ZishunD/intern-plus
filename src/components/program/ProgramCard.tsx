@@ -7,7 +7,7 @@ interface ProgramCardProps {
 }
 
 type JobInfo = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;

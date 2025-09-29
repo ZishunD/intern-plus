@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 type JobInfo = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;
