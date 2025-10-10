@@ -32,7 +32,7 @@ interface PageProps {
 }
 
 export default function StatusPage({ params }: PageProps) {
-  let status: Status = "success"; // Replace with actual status logic
+  const status: Status = "success"; // Replace with actual status logic
   const testApplication: HeadProps = {
     fname: "John",
     lname: "Doe",
@@ -42,7 +42,7 @@ export default function StatusPage({ params }: PageProps) {
     position: "Software Engineer Intern",
     type: "Full-time",
   };
-  const { id } = use(params);
+
   const statusComponents: Record<string, React.ReactNode> = {
     pending: <SubmitPending />,
     request_application: <RIA />,

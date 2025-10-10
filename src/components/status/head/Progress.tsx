@@ -11,7 +11,7 @@ export default function ProgressBar() {
   ];
 
   // ✅ Manage current step in this component (can also be prop if needed)
-  const [currentStep, setCurrentStep] = useState(1); // Zero-based index
+  const [currentStep, _] = useState(1); // Zero-based index
 
   return (
     <div className='bg-[#F3F5FC] p-10 lg:p-10 pb-20 relative shadow-xl flex justify-between items-center'>

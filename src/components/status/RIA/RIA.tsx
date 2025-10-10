@@ -16,6 +16,7 @@ export default function RIA() {
 
   const svgs: ReactNode[] = [
     <svg
+      key='1'
       width='100'
       height='99'
       viewBox='0 0 100 99'
@@ -48,6 +49,7 @@ export default function RIA() {
       </defs>
     </svg>,
     <svg
+      key='2'
       width='99'
       height='99'
       viewBox='0 0 99 99'
@@ -80,6 +82,7 @@ export default function RIA() {
       </defs>
     </svg>,
     <svg
+      key='3'
       width='99'
       height='99'
       viewBox='0 0 99 99'
@@ -112,6 +115,7 @@ export default function RIA() {
       </defs>
     </svg>,
     <svg
+      key='4'
       width='99'
       height='99'
       viewBox='0 0 99 99'
@@ -143,8 +147,8 @@ export default function RIA() {
         />
       </defs>
     </svg>,
-
     <svg
+      key='5'
       width='94'
       height='94'
       viewBox='0 0 94 94'
