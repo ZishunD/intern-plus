@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { loginIntern } from "../lib/graphql/auth";
+import { loginIntern, loginHr } from "../lib/graphql/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LanguageDropdown from "../../components/LanguageDropdown";
@@ -16,6 +16,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userType, setUserType] = useState<"intern" | "company">("intern");
 
   useEffect(() => {
     if (error) {
@@ -32,15 +33,22 @@ export default function LoginPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const remember = (formData.get("remember") as string) === "on";
+    let token = "";
+    let res: any;
     try {
-      const res = await loginIntern(email, password);
-      const token = res.loginIntern;
+      if (userType === "intern") {
+        res = await loginIntern(email, password);
+        token = res.loginIntern;
+      } else if (userType === "company") {
+        res = await loginHr(email, password);
+        token = res.loginHr;
+      }
       if (remember) {
         localStorage.setItem("token", token); // 长期存储
       } else {
         sessionStorage.setItem("token", token); // 会话存储
       }
-      router.push("/dashboard"); // 登录成功跳转
+      router.push("/companyDashboard"); // 登录成功跳转
     } catch {
       setError("Login failed");
     } finally {
@@ -49,7 +57,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className='bg-[#D1D1F0] font-[Fustat] min-h-screen'>
+    <div className='bg-[#F3F5FC] font-[Fustat] min-h-screen'>
       {/* Navbar */}
       <div className='nav bg-white'>
         <div className='mx-10 flex items-center justify-between py-10 md:px-0'>
@@ -85,7 +93,29 @@ export default function LoginPage() {
         {/* Right form */}
         <div className='md:w-1/2 flex items-center justify-center p-6'>
           <div className='w-full max-w-md p-6'>
-            <h2 className='text-4xl font-extrabold uppercase mb-6'>Register</h2>
+            <h2 className='text-4xl font-extrabold uppercase mb-6'>Log in</h2>
+            <div className='flex justify-center mb-4 space-x-4'>
+              <button
+                type='button'
+                className={`px-4 py-2 rounded-sm ${
+                  userType === "intern"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => setUserType("intern")}>
+                Individual
+              </button>
+              <button
+                type='button'
+                className={`px-4 py-2 rounded-sm ${
+                  userType === "company"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() => setUserType("company")}>
+                Company
+              </button>
+            </div>
             {error && (
               <p
                 className={`text-red-500 mt-2 transition-opacity duration-500 ease-out ${
@@ -165,38 +195,48 @@ export default function LoginPage() {
             </form>
 
             {/* Social Buttons */}
-            <div className='grid grid-flow-col gap-4 mt-4 w-full'>
-              <SocialButton
-                href='/login/facebook'
-                text='Facebook'
-                svg={
-                  <svg
-                    className='h-7 w-7'
-                    viewBox='0 0 16 16'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'>
-                    <path
+            {userType === "intern" && (
+              <div className='grid grid-flow-col gap-4 mt-4 w-full'>
+                <SocialButton
+                  href='/login/facebook'
+                  text='Facebook'
+                  svg={
+                    <svg
+                      className='h-7 w-7'
+                      viewBox='0 0 16 16'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'>
+                      <path
+                        fill='#000000'
+                        d='M15 8a7 7 0 00-7-7 7 7 0 00-1.094 13.915v-4.892H5.13V8h1.777V6.458c0-1.754 1.045-2.724 2.644-2.724.766 0 1.567.137 1.567.137v1.723h-.883c-.87 0-1.14.54-1.14 1.093V8h1.941l-.31 2.023H9.094v4.892A7.001 7.001 0 0015 8z'
+                      />
+                    </svg>
+                  }
+                />
+                <SocialButton
+                  href='/auth/google'
+                  text='Google'
+                  svg={
+                    <svg
                       fill='#000000'
-                      d='M15 8a7 7 0 00-7-7 7 7 0 00-1.094 13.915v-4.892H5.13V8h1.777V6.458c0-1.754 1.045-2.724 2.644-2.724.766 0 1.567.137 1.567.137v1.723h-.883c-.87 0-1.14.54-1.14 1.093V8h1.941l-.31 2.023H9.094v4.892A7.001 7.001 0 0015 8z'
-                    />
-                  </svg>
-                }
-              />
-              <SocialButton
-                href='/auth/google'
-                text='Google'
-                svg={
-                  <svg
-                    fill='#000000'
-                    className='h-7 w-7'
-                    viewBox='-2 -2 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
-                    preserveAspectRatio='xMinYMin'>
-                    <path d='M4.376 8.068A5.944 5.944 0 0 0 4.056 10c0 .734.132 1.437.376 2.086a5.946 5.946 0 0 0 8.57 3.045h.001a5.96 5.96 0 0 0 2.564-3.043H10.22V8.132h9.605a10.019 10.019 0 0 1-.044 3.956 9.998 9.998 0 0 1-3.52 5.71A9.958 9.958 0 0 1 10 20 9.998 9.998 0 0 1 1.118 5.401 9.998 9.998 0 0 1 10 0c2.426 0 4.651.864 6.383 2.302l-3.24 2.652a5.948 5.948 0 0 0-8.767 3.114z' />
-                  </svg>
-                }
-              />
-            </div>
+                      className='h-7 w-7'
+                      viewBox='-2 -2 24 24'
+                      xmlns='http://www.w3.org/2000/svg'
+                      preserveAspectRatio='xMinYMin'>
+                      <path d='M4.376 8.068A5.944 5.944 0 0 0 4.056 10c0 .734.132 1.437.376 2.086a5.946 5.946 0 0 0 8.57 3.045h.001a5.96 5.96 0 0 0 2.564-3.043H10.22V8.132h9.605a10.019 10.019 0 0 1-.044 3.956 9.998 9.998 0 0 1-3.52 5.71A9.958 9.958 0 0 1 10 20 9.998 9.998 0 0 1 1.118 5.401 9.998 9.998 0 0 1 10 0c2.426 0 4.651.864 6.383 2.302l-3.24 2.652a5.948 5.948 0 0 0-8.767 3.114z' />
+                    </svg>
+                  }
+                />
+              </div>
+            )}
+            {userType === "company" && (
+              <button
+                type='submit'
+                disabled={loading}
+                className='mt-2 w-full bg-[#B1BBE7] text-white py-2 rounded-sm hover:bg-blue-600 flex items-center justify-center space-x-2'>
+                Request Demo
+              </button>
+            )}
             {/* register */}
             <div className='flex items-center space-x-2 mt-5'>
               <span>Do not have an account?</span>

@@ -158,7 +158,7 @@ export default function Navbar({ routes }: NavbarProps) {
 
       {/* Mobile Nav */}
       {open && (
-        <div className='lg:hidden px-4 mt-2 space-y-2 text-lg'>
+        <div className='flex flex-col items-center lg:hidden px-4 mt-2 space-y-2 text-lg'>
           {routes.map((r) => (
             <Link
               key={r.path}

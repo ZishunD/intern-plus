@@ -10,11 +10,10 @@ export async function registerCompany(input: {
   provider_id?: string;
   provider?: string;
   avatar_url?: string;
-  application_id?: number;
 }) {
   const mutation = gql`
-    mutation CreateCompany($input: NewCompanyInput!) {
-      createCompany(input: $input) {
+    mutation CreateHr($input: NewHrInput!) {
+      createHr(input: $input) {
         id
         first_name
         last_name

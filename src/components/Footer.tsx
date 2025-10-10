@@ -20,6 +20,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const pathname = usePathname();
   if (specialRoutes.includes(pathname)) return null;
+  if (pathname.startsWith("/application/status/")) return null;
 
   return (
     <div className='footer px-6 py-10 text-gray-800 text-sm font-[Fustat]'>

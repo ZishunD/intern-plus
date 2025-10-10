@@ -10,10 +10,10 @@ export async function loginIntern(email: string, password: string): Promise<{ lo
   return client.request(mutation, { email, password });
 }
 
-export async function loginCompany(email: string, password: string) {
+export async function loginHr(email: string, password: string) {
   const mutation = gql`
-    mutation LoginCompany($email: String!, $password: String!) {
-      loginCompany(email: $email, password: $password)
+    mutation LoginHr($email: String!, $password: String!) {
+      loginHr(email: $email, password: $password)
     }
   `;
   return client.request(mutation, { email, password });
